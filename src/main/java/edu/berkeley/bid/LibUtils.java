@@ -59,7 +59,7 @@ public final class LibUtils
      */
     public static enum ARCHType
     {
-        PPC, PPC_64, SPARC, X86, X86_64, ARM, MIPS, RISC, UNKNOWN
+        PPC, PPC_64, SPARC, X86, X86_64, ARM, AARCH64, MIPS, RISC, UNKNOWN
     }
     
     /**
@@ -399,9 +399,13 @@ public final class LibUtils
         {
             return ARCHType.SPARC;
         }
-        if (osArch.startsWith("arm") || osArch.startsWith("aarch"))   // For now, arm CUDA libs are still 32bit on 64bit machines
-        {                                                             // this code will split if that changes
+        if (osArch.startsWith("arm"))
+        {
             return ARCHType.ARM;
+        }
+        if (osArch.startsWith("aarch64"))
+        {
+            return ARCHType.AARCH64;
         }
         if (osArch.startsWith("mips"))
         {
